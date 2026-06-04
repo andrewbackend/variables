@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variables - Apps Móviles</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{
+    background: linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+    color:white;
+    overflow-x:hidden;
+    position:relative;
+    min-height:100vh;
+}
+/* Fondo tecnológico animado */
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+    linear-gradient(rgba(0,255,255,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,.08) 1px, transparent 1px);
+    background-size:50px 50px;
+    animation:moverGrid 15s linear infinite;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:
+    radial-gradient(circle, rgba(0,255,255,.12) 2px, transparent 3px);
+    background-size:80px 80px;
+    animation:moverParticulas 30s linear infinite;
+    z-index:-1;
+}
+
+.tech-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.tech-bg span{
+    position:absolute;
+    display:block;
+    width:12px;
+    height:12px;
+    background:#22d3ee;
+    border-radius:50%;
+    box-shadow:0 0 20px #22d3ee,
+               0 0 40px #22d3ee;
+    animation:float 15s linear infinite;
+}
+
+.tech-bg span:nth-child(1){
+    left:10%;
+    animation-duration:12s;
+}
+
+.tech-bg span:nth-child(2){
+    left:30%;
+    animation-duration:18s;
+}
+
+.tech-bg span:nth-child(3){
+    left:50%;
+    animation-duration:15s;
+}
+
+.tech-bg span:nth-child(4){
+    left:70%;
+    animation-duration:20s;
+}
+
+.tech-bg span:nth-child(5){
+    left:90%;
+    animation-duration:13s;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh);
+    }
+    to{
+        transform:translateY(-20vh);
+    }
+}
+
+@keyframes moverGrid{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(50px);
+    }
+}
+
+@keyframes moverParticulas{
+    from{
+        transform:translate(0,0) rotate(0deg);
+    }
+    to{
+        transform:translate(100px,100px) rotate(360deg);
+    }
+}
+header{text-align:center;padding:30px}
+h1{font-size:2.5rem;color:#67e8f9}
+p{color:#cbd5e1}
+.container{
+display:flex;gap:25px;justify-content:center;flex-wrap:wrap;
+padding:20px;min-height:80vh;
+}
+.phone{
+width:290px;height:620px;border-radius:40px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+padding:18px;box-shadow:0 0 30px rgba(0,255,255,.15);
+border:1px solid rgba(255,255,255,.15);
+}
+.notch{width:120px;height:26px;background:#000;border-radius:20px;margin:auto}
+.status{display:flex;justify-content:space-between;margin-top:10px;font-size:.8rem}
+.photo{
+height:180px;border-radius:20px;margin:15px 0;
+background-size:cover;background-position:center;
+}
+input,select{
+width:100%;padding:12px;border:none;border-radius:12px;
+background:#111827;color:white;margin-top:10px;
+}
+button{
+width:100%;margin-top:12px;padding:12px;border:none;
+border-radius:12px;background:#06b6d4;color:white;
+font-weight:bold;cursor:pointer;
+}
+.toast{display:none;margin-top:10px;background:#22c55e;padding:8px;border-radius:10px}
+.memory{
+width:90%;max-width:1200px;margin:180px auto 50px auto;
+background:rgba(255,255,255,.08);
+padding:25px;border-radius:25px;
+}
+.memory h2{text-align:center;color:#67e8f9;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:#020617;padding:15px;border-radius:15px}
+.code{
+margin-top:20px;background:black;padding:15px;border-radius:15px;
+white-space:pre-line;color:#00ff88
+}
+.barbg{height:18px;background:#111827;border-radius:15px;margin-top:15px}
+.bar{height:100%;width:0;background:linear-gradient(90deg,#22d3ee,#8b5cf6);border-radius:15px;transition:.5s}
+@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<header>
+
+    <h4>Project author: Andrew Torres Ramírez</h4>
+</header>
+
+<div class="container">
+
+<div class="phone">
+<div class="notch"></div>
+<div class="status"><span id="t1"></span><span>🔋100%</span></div>
+<div class="photo" style="background-image:url('https://thumbs.dreamstime.com/b/ilustraci%C3%B3n-de-avatar-estudiante-icono-perfil-usuario-juvenil-retrato-simple-un-dibujos-animados-vectorial-276214170.jpg');"></div>
+<h3> Estudiante</h3>
+<input id="nombre" placeholder="Nombre del estudiante">
+<button onclick="guardar('nombre')">Guardar</button>
+<div class="toast" id="msgnombre">✓ Guardado</div>
+</div>
+
+<div class="phone">
+<div class="notch"></div>
+<div class="status"><span id="t2"></span><span>🔋100%</span></div>
+<div class="photo" style="background-image:url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600');"></div>
+<h3> Nota</h3>
+<input id="nota" type="number" placeholder="Nota">
+<button onclick="guardar('nota')">Guardar</button>
+<div class="toast" id="msgnota">✓ Guardado</div>
+</div>
+
+<div class="phone">
+<div class="notch"></div>
+<div class="status"><span id="t3"></span><span>🔋100%</span></div>
+<div class="photo" style="background-image:url('https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=600');"></div>
+<h3> Edad</h3>
+<input id="edad" type="number" placeholder="Edad">
+<button onclick="guardar('edad')">Guardar</button>
+<div class="toast" id="msgedad">✓ Guardado</div>
+</div>
+
+<div class="phone">
+<div class="notch"></div>
+<div class="status"><span id="t4"></span><span>🔋100%</span></div>
+<div class="photo" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600');"></div>
+<h3> Curso</h3>
+<select id="curso">
+<option value="">Selecciona</option>
+<option>Tecnología</option>
+<option>Matemática</option>
+<option>Comunicación</option>
+<option>Ciencia</option>
+</select>
+<button onclick="guardar('curso')">Guardar</button>
+<div class="toast" id="msgcurso">✓ Guardado</div>
+</div>
+
+</div>
+
+<div class="memory">
+<h2> MEMORIA CENTRAL DE LA COMPUTADORA</h2>
+
+<div class="grid">
+<div class="card">Nombre: <b id="mnombre">---</b></div>
+<div class="card">Nota: <b id="mnota">---</b></div>
+<div class="card">Edad: <b id="medad">---</b></div>
+<div class="card">Curso: <b id="mcurso">---</b></div>
+</div>
+
+<div class="barbg"><div class="bar" id="bar"></div></div>
+
+<div class="code" id="code"># Aquí aparecerá el código Python</div>
+</div>
+
+<script>
+    
+let datos={};
+
+function hora(){
+ let h=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+ ['t1','t2','t3','t4'].forEach(id=>document.getElementById(id).textContent=h);
+}
+setInterval(hora,1000); hora();
+
+function guardar(tipo){
+ let v=document.getElementById(tipo).value;
+ if(!v) return;
+ datos[tipo]=v;
+ document.getElementById('m'+tipo).textContent=v;
+ document.getElementById('msg'+tipo).style.display='block';
+ setTimeout(()=>document.getElementById('msg'+tipo).style.display='none',1500);
+ actualizar();
+}
+
+function actualizar(){
+ document.getElementById('bar').style.width=(Object.keys(datos).length/4*100)+'%';
+ let c='';
+ if(datos.nombre) c+=`nombre = "${datos.nombre}"\n`;
+ if(datos.nota) c+=`nota = ${datos.nota}\n`;
+ if(datos.edad) c+=`edad = ${datos.edad}\n`;
+ if(datos.curso) c+=`curso = "${datos.curso}"\n`;
+ document.getElementById('code').textContent=c;
+}
+
+
+</script>
+<div class="tech-bg">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+</body>
+</html>
